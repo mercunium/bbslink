@@ -1,0 +1,2378 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RMLib</name>
+    </assembly>
+    <members>
+        <member name="T:RandM.RMLib.AES">
+            <summary>
+            Utility class that handles encryption
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.AES.Encrypt(System.String,System.String,System.String)">
+            <summary>
+            Encrypts a string
+            </summary>
+            <param name="plaintext">Text to be encrypted</param>
+            <param name="password">Password to encrypt with</param>
+            <param name="salt">Salt to encrypt with</param>
+            <returns>An encrypted string</returns>
+        </member>
+        <member name="M:RandM.RMLib.AES.Decrypt(System.String,System.String,System.String)">
+            <summary>
+            Decrypts a string
+            </summary>
+            <param name="cipherText">Text to be decrypted</param>
+            <param name="password">Password to decrypt with</param>
+            <param name="salt">Salt to decrypt with</param>
+            <returns>A decrypted string</returns>
+        </member>
+        <member name="T:RandM.RMLib.FileData">
+            <summary>
+            Contains information about a file returned by the 
+            <see cref="T:RandM.RMLib.FastDirectoryEnumerator"/> class.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.FileData.Attributes">
+            <summary>
+            Attributes of the file.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.FileData.CreationTimeUtc">
+            <summary>
+            File creation time in UTC
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.FileData.LastAccessTimeUtc">
+            <summary>
+            File last access time in UTC
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.FileData.LastWriteTimeUtc">
+            <summary>
+            File last write time in UTC
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.FileData.Size">
+            <summary>
+            Size of the file in bytes
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.FileData.Name">
+            <summary>
+            Name of the file
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.FileData.Path">
+            <summary>
+            Full path to the file.
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.FileData.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </returns>
+        </member>
+        <member name="M:RandM.RMLib.FileData.#ctor(System.String,RandM.RMLib.NativeMethods.WIN32_FIND_DATA)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RandM.RMLib.FileData"/> class.
+            </summary>
+            <param name="dir">The directory that the file is stored at</param>
+            <param name="findData">WIN32_FIND_DATA structure that this
+            object wraps.</param>
+        </member>
+        <member name="P:RandM.RMLib.FileData.LastAccesTime">
+            <summary>
+            Gets the last access time in local time.
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.FileData.LastWriteTime">
+            <summary>
+            Gets the last access time in local time.
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.FastDirectoryEnumerator">
+            <summary>
+            A fast enumerator of files in a directory.  Use this if you need to get attributes for 
+            all files in a directory.
+            </summary>
+            <remarks>
+            This enumerator is substantially faster than using <see cref="M:System.IO.Directory.GetFiles(System.String)"/>
+            and then creating a new FileInfo object for each path.  Use this version when you 
+            will need to look at the attibutes of each file returned (for example, you need
+            to check each file in a directory to see if it was modified after a specific date).
+            </remarks>
+        </member>
+        <member name="M:RandM.RMLib.FastDirectoryEnumerator.EnumerateFiles(System.String)">
+            <summary>
+            Gets <see cref="T:RandM.RMLib.FileData"/> for all the files in a directory.
+            </summary>
+            <param name="path">The path to search.</param>
+            <returns>An object that implements <see cref="T:System.Collections.Generic.IEnumerable`1"/> and 
+            allows you to enumerate the files in the given directory.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="path"/> is a null reference (Nothing in VB)
+            </exception>
+        </member>
+        <member name="M:RandM.RMLib.FastDirectoryEnumerator.EnumerateFiles(System.String,System.String)">
+            <summary>
+            Gets <see cref="T:RandM.RMLib.FileData"/> for all the files in a directory that match a 
+            specific filter.
+            </summary>
+            <param name="path">The path to search.</param>
+            <param name="searchPattern">The search string to match against files in the path.</param>
+            <returns>An object that implements <see cref="T:System.Collections.Generic.IEnumerable`1"/> and 
+            allows you to enumerate the files in the given directory.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="path"/> is a null reference (Nothing in VB)
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="filter"/> is a null reference (Nothing in VB)
+            </exception>
+        </member>
+        <member name="M:RandM.RMLib.FastDirectoryEnumerator.EnumerateFiles(System.String,System.String,System.IO.SearchOption)">
+            <summary>
+            Gets <see cref="T:RandM.RMLib.FileData"/> for all the files in a directory that 
+            match a specific filter, optionally including all sub directories.
+            </summary>
+            <param name="path">The path to search.</param>
+            <param name="searchPattern">The search string to match against files in the path.</param>
+            <param name="searchOption">
+            One of the SearchOption values that specifies whether the search 
+            operation should include all subdirectories or only the current directory.
+            </param>
+            <returns>An object that implements <see cref="T:System.Collections.Generic.IEnumerable`1"/> and 
+            allows you to enumerate the files in the given directory.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="path"/> is a null reference (Nothing in VB)
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="filter"/> is a null reference (Nothing in VB)
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="searchOption"/> is not one of the valid values of the
+            <see cref="T:System.IO.SearchOption"/> enumeration.
+            </exception>
+        </member>
+        <member name="M:RandM.RMLib.FastDirectoryEnumerator.GetFiles(System.String,System.String,System.IO.SearchOption)">
+            <summary>
+            Gets <see cref="T:RandM.RMLib.FileData"/> for all the files in a directory that match a 
+            specific filter.
+            </summary>
+            <param name="path">The path to search.</param>
+            <param name="searchPattern">The search string to match against files in the path.</param>
+            <returns>An object that implements <see cref="T:System.Collections.Generic.IEnumerable`1"/> and 
+            allows you to enumerate the files in the given directory.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="path"/> is a null reference (Nothing in VB)
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="filter"/> is a null reference (Nothing in VB)
+            </exception>
+        </member>
+        <member name="T:RandM.RMLib.FastDirectoryEnumerator.FileEnumerable">
+            <summary>
+            Provides the implementation of the 
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> interface
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.FastDirectoryEnumerator.FileEnumerable.#ctor(System.String,System.String,System.IO.SearchOption)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RandM.RMLib.FastDirectoryEnumerator.FileEnumerable"/> class.
+            </summary>
+            <param name="path">The path to search.</param>
+            <param name="filter">The search string to match against files in the path.</param>
+            <param name="searchOption">
+            One of the SearchOption values that specifies whether the search 
+            operation should include all subdirectories or only the current directory.
+            </param>
+        </member>
+        <member name="M:RandM.RMLib.FastDirectoryEnumerator.FileEnumerable.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can 
+            be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:RandM.RMLib.FastDirectoryEnumerator.FileEnumerable.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be 
+            used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="T:RandM.RMLib.FastDirectoryEnumerator.FileEnumerator">
+            <summary>
+            Provides the implementation of the 
+            <see cref="T:System.Collections.Generic.IEnumerator`1"/> interface
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.FastDirectoryEnumerator.FileEnumerator.#ctor(System.String,System.String,System.IO.SearchOption)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RandM.RMLib.FastDirectoryEnumerator.FileEnumerator"/> class.
+            </summary>
+            <param name="path">The path to search.</param>
+            <param name="filter">The search string to match against files in the path.</param>
+            <param name="searchOption">
+            One of the SearchOption values that specifies whether the search 
+            operation should include all subdirectories or only the current directory.
+            </param>
+        </member>
+        <member name="M:RandM.RMLib.FastDirectoryEnumerator.FileEnumerator.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, 
+            or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.FastDirectoryEnumerator.FileEnumerator.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>
+            true if the enumerator was successfully advanced to the next element; 
+            false if the enumerator has passed the end of the collection.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            The collection was modified after the enumerator was created.
+            </exception>
+        </member>
+        <member name="M:RandM.RMLib.FastDirectoryEnumerator.FileEnumerator.Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            The collection was modified after the enumerator was created.
+            </exception>
+        </member>
+        <member name="P:RandM.RMLib.FastDirectoryEnumerator.FileEnumerator.Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+            <value></value>
+            <returns>
+            The element in the collection at the current position of the enumerator.
+            </returns>
+        </member>
+        <member name="P:RandM.RMLib.FastDirectoryEnumerator.FileEnumerator.System#Collections#IEnumerator#Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+            <value></value>
+            <returns>
+            The element in the collection at the current position of the enumerator.
+            </returns>
+        </member>
+        <member name="T:RandM.RMLib.FastDirectoryEnumerator.FileEnumerator.SearchContext">
+            <summary>
+            Hold context information about where we current are in the directory search.
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.OSUtils.GetNameAndVersion">
+            <summary>
+            Gets Operating System Name, Service Pack, and Architecture using WMI with the legacy methods as a fallback
+            </summary>
+            <returns>String containing the name of the operating system followed by its service pack (if any) and architecture</returns>
+        </member>
+        <member name="M:RandM.RMLib.OSUtils.getOSLegacy">
+            <summary>
+            Gets Operating System Name using .Net's Environment class.
+            </summary>
+            <returns>String containing the name of the operating system followed by its service pack (if any)</returns>
+        </member>
+        <member name="M:RandM.RMLib.OSUtils.getOSServicePackLegacy">
+            <summary>
+            Gets the installed Operating System Service Pack using .Net's Environment class.
+            </summary>
+            <returns>String containing the operating system's installed service pack (if any)</returns>
+        </member>
+        <member name="M:RandM.RMLib.OSUtils.getOSArchitectureLegacy">
+            <summary>
+            Gets Operating System Architecture.  This does not tell you if the program in running in
+            32- or 64-bit mode or if the CPU is 64-bit capable.  It tells you whether the actual Operating
+            System is 32- or 64-bit.
+            </summary>
+            <returns>Int containing 32 or 64 representing the number of bits in the OS Architecture</returns>
+        </member>
+        <member name="T:RandM.RMLib.RMProcess">
+            <summary>
+            Stripped down version of Process.cs cobbled together from the .NET framework 2.0 source code
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.SolarCalculator.IsSunUp(System.Double,System.Double,System.Double,System.Boolean)">
+            <summary>
+            Determine whether the sun is up (has risen but not set) at the given latitude and longitude.
+            You'll have to manually specify the timezone offset (and optionally indicate whether the location
+            is currently observing daylight-savings time if your offset hasn't already accounted for this)
+            </summary>
+            <param name="lat">Latitude (positive for north, negative for south)</param>
+            <param name="lng">Longitude (positive for west, negative for east)</param>
+            <returns>true if the sun is up at the given location, false otherwise</returns>
+        </member>
+        <member name="M:RandM.RMLib.TcpConnection.ReadString">
+            <summary>
+            Reads the entire buffer into a string variable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:RandM.RMLib.WebSocketNegotiationState">
+            <summary>
+            The possible states the websocket negotiator may find itself in
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.WebSocketNegotiationState.NeedPacketStart">
+            <summary>
+            Need the start of a new packet/frame
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.WebSocketNegotiationState.NeedPayloadLength">
+            <summary>
+            Need the payload length bytes
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.WebSocketNegotiationState.NeedMaskingKey">
+            <summary>
+            Need the masking key bytes
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.WebSocketNegotiationState.Data">
+            <summary>
+            Receiving data
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.RMDoor">
+            <summary>
+            Please note that the Door class is not thread safe.  If:
+              1) Anybody ever uses this class, and
+              2) A use-case for a thread safe Door class is presented
+            then I'll be happy to add the required locking to make it thread safe.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.DropInfo">
+            <summary>
+            Contains information that was read from the dropfile (if a dropfile was read)
+            Not all dropfiles containt he same information, so only a subset of this data is guaranteed to exist
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.LastKey">
+            <summary>
+            Contains information about the last key that was read by the doorkit
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.MOREPrompt">
+            <summary>
+            The prompt that gets displayed when the More() method is called
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.Session">
+            <summary>
+            Contains information about the current session
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.#ctor">
+            <summary>
+            Instantiates and initializes the doorkit with default values
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.Finalize">
+            <summary>
+            Cleans up the doorkit
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.Dispose">
+            <summary>
+            Disposes the doorkit
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.Dispose(System.Boolean)">
+            <summary>
+            Disposes the doorkit
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.ClearBuffers">
+            <summary>
+            Clears the local and remote input buffers
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.Disconnect">
+            <summary>
+            Closes the socket connection, which will disconnect the remote user
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.ClrEol">
+            <summary>
+            Clears all text to the end of the line
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.ClrScr">
+            <summary>
+            Clears all text on the screen
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.CursorDown(System.Int32)">
+            <summary>
+            Moves the cursor down the screen
+            </summary>
+            <param name="count">The number of lines to move the cursor down</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.CursorLeft(System.Int32)">
+            <summary>
+            Moves the cursor to the left on the screen
+            </summary>
+            <param name="count">The number of columns to move the cursor left</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.CursorRestore">
+            <summary>
+            Restores the previously saved cursor position
+            </summary>
+            <seealso cref="M:RandM.RMLib.RMDoor.CursorSave"/>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.CursorRight(System.Int32)">
+            <summary>
+            Moves the cursor to the right on the screen
+            </summary>
+            <param name="count">The number of columns to move the cursor right</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.CursorSave">
+            <summary>
+            Saves the current cursor position
+            </summary>
+            <seealso cref="M:RandM.RMLib.RMDoor.CursorRestore"/>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.CursorUp(System.Int32)">
+            <summary>
+            Moves the cursor up the screen
+            </summary>
+            <param name="count">The number of rows to move the cursor up</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.DisplayFile(System.String,System.Int32)">
+            <summary>
+            Displays a file (ANSI, ASCII, Text) on screen, optionally pausing every x lines
+            </summary>
+            <param name="fileName">The file to display</param>
+            <param name="linesBeforePause">The number of lines to display before pausing.  0 causes no pauses</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.DrawBox(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,RandM.RMLib.CrtPanel.BorderStyle)">
+            <summary>
+            Draws a box on the screen with a customizable position, colour, and border
+            </summary>
+            <param name="left">Column for the left side of the box</param>
+            <param name="top">Row for the top of the box</param>
+            <param name="right">Column for the right side of the box</param>
+            <param name="bottom">Row for the bottom of the box</param>
+            <param name="foregroundColour">Foreground colour for the </param>
+            <param name="backgroundColour"></param>
+            <param name="borderStyle"></param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.GotoX(System.Int32)">
+            <summary>
+            Move the cursor to the given x coordinate on the current line
+            </summary>
+            <param name="column">The 1-based x coordinate to move to</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.GotoXY(System.Int32,System.Int32)">
+            <summary>
+            Move the cursor to the given x,y coordinate
+            </summary>
+            <param name="column">The 1-based x coordinate</param>
+            <param name="row">The 1-based y coordinate</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.GotoY(System.Int32)">
+            <summary>
+            Move the cursor to the given y coordinate on the current column
+            </summary>
+            <param name="row">The 1-based y coordinate to move to</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.KeyPressed">
+            <summary>
+            Checks whether a key has been pressed on either the local or remote side
+            </summary>
+            <returns>True if a keypress is waiting, false if no keypress is available</returns>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.More">
+            <summary>
+            Displays a MORE prompt and waits for a keypress.  Erased the prompt after a key is pressed
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.Open">
+            <summary>
+            Initializes the socket (when not in local mode)
+            </summary>
+            <returns>True if the socket was opened, false if it was not</returns>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.PipeToAnsi(System.String)">
+            <summary>
+            Transforms pipe sequences to ansi sequences in the input string
+            </summary>
+            <param name="AText">The string with pipe sequences</param>
+            <returns>A string with ansi sequences in place of pipe sequences</returns>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.ReadByte">
+            <summary>
+            Reads a byte from either the local or remote side with no translation
+            </summary>
+            <returns>A byte if one was available, or null if no key was waiting</returns>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.ReadKey">
+            <summary>
+            Reads a key from either the local or remote side
+            </summary>
+            <returns>A key if one was available, or null if no key was waiting</returns>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.ReadLn">
+            <summary>
+            A shortcut for TextBox()
+            </summary>
+            <returns>The line of text input by the user</returns>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.Startup">
+            <summary>
+            Parses the command-line and gets the doorkit ready for use
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.StripSeth(System.String)">
+            <summary>
+            Strips "seth" (AKA LORD) sequences from an input string
+            </summary>
+            <param name="text">The text containing seth sequences</param>
+            <returns>The text with seth sequences removed</returns>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.SysopChat">
+            <summary>
+            A very basic sysop chat feature
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.TextAttr(System.Int32)">
+            <summary>
+            Sets both the foreground and background colour to use for future write operations
+            </summary>
+            <param name="attribute">The new colour to use</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.TextBackground(System.Int32)">
+            <summary>
+            Sets the background colour to use for future write operations (the foreground colour is unchanged)
+            </summary>
+            <param name="colour">The new background colour to use</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.TextBox(System.String,System.String,System.Char,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Basically the doorkit equivalent of a textbox you might see on a webpage
+            </summary>
+            <param name="defaultText">The text to put in the text box by default</param>
+            <param name="allowedCharacters">The characters the user is allowed to type in the box (see CharacterMask class for some built-in masks)</param>
+            <param name="passwordCharacter">The character to echo to the screen for secure inputs, or '\0' to display the actual character the user presses</param>
+            <param name="numberOfCharactersToDisplay">The size (width) of the textbox</param>
+            <param name="maximumLength">The maximum length of the input string (if this is greater than numberOfCharactersToDisplay, the textbox will scroll)</param>
+            <param name="attribute">The colour of the textbox and input text</param>
+            <returns>The line of text input by the user</returns>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.TextColor(System.Int32)">
+            <summary>
+            Sets the foreground colour to use for future write operations (the background colour is unchanged)
+            </summary>
+            <param name="colour">The new foreground colour to use</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.Write(System.String)">
+            <summary>
+            Writes text to both the local and remote screen
+            </summary>
+            <param name="text">The text to write</param>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.WriteLn">
+            <summary>
+            Advances the cursor to the beginning of the next line, scrolling the screen if necessary
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMDoor.WriteLn(System.String)">
+            <summary>
+            Outputs a string of text to the screen before advancing the cursor to the beginning of the next line, scrolling if necessary
+            </summary>
+            <param name="text">The text to be displayed</param>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.OnHangUp">
+            <summary>
+            The method delegate that gets called when the user hangs up in the door
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.OnLocalLogin">
+            <summary>
+            The method delegate that gets called when a user logs in locally
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.OnStatusBar">
+            <summary>
+            The method delegate that gets called when the status bar needs to be updated
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.OnSysOpKey">
+            <summary>
+            The method delegate that gets called when a "special" key is pressed in the local window
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.OnTimeOut">
+            <summary>
+            The method delegate that gets called when the user idles for too long
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.OnTimeOutWarning">
+            <summary>
+            The method delegate that gets called each minute when the user is idling
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.OnTimeUp">
+            <summary>
+            The method delegate that gets called when the user runs out of time
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.OnTimeUpWarning">
+            <summary>
+            The method delegate that gets called each minute when the user is running out of time
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.RMDoor.OnUsage">
+            <summary>
+            The method delegate that gets called when the usage screen needs to be displayed
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.RMDoor.Carrier">
+            <summary>
+            Checks for a carrier.  Always returns true for local sessions
+            </summary>
+            <returns>True if local or carrier exists, false if no carrier exists</returns>
+        </member>
+        <member name="P:RandM.RMLib.RMDoor.Local">
+            <summary>
+            Checks whether the door is running in local mode
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.RMDoor.LocalEcho">
+            <summary>
+            Determines whether local echo is enabled
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.RMDoor.PipeWrite">
+            <summary>
+            Determines whether pipe sequences should automatically be transformed to ansi sequences
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.RMDoor.SecondsIdle">
+            <summary>
+            The number of seconds the user has been idle for
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.RMDoor.SecondsLeft">
+            <summary>
+            The number of seconds the user has left this call
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.RMDoor.SecondsOn">
+            <summary>
+            The number of seconds the user has been in the door
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.RMDoor.SethWrite">
+            <summary>
+            Determines whether "seth" (aka LORD) sequences should be parsed
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.RMDoor.StripLF">
+            <summary>
+            Determines whether the LF in CR+LF pairs is stripped out
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.RMDoor.StripNull">
+            <summary>
+            Determines whether the NULL in CR+NULL pairs is stripped out
+            </summary>
+        </member>
+        <member name="E:RandM.RMLib.RMDoor.OnCLP">
+            <summary>
+            The event that gets raised for each command-line parameter
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.RMDoor.OnHangUpCallback">
+            <summary>
+            The method delegate that gets called when the user hangs up in the door
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.RMDoor.OnLocalLoginCallback">
+            <summary>
+            The method delegate that gets called when a user logs in locally
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.RMDoor.OnStatusBarCallback">
+            <summary>
+            The method delegate that gets called when the status bar needs to be updated
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.RMDoor.OnSysOpKeyCallback">
+            <summary>
+            The method delegate that gets called when a "special" key is pressed in the local window
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.RMDoor.OnTimeOutCallback">
+            <summary>
+            The method delegate that gets called when the user idles for too long
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.RMDoor.OnTimeOutWarningCallback">
+            <summary>
+            The method delegate that gets called each minute when the user is idling
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.RMDoor.OnTimeUpCallback">
+            <summary>
+            The method delegate that gets called when the user runs out of time
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.RMDoor.OnTimeUpWarningCallback">
+            <summary>
+            The method delegate that gets called each minute when the user is running out of time
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.RMDoor.OnUsageCallback">
+            <summary>
+            The method delegate that gets called when the usage screen needs to be displayed
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.DoorEmulationType">
+            <summary>
+            The available emulation types supported by Door
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.DoorEmulationType.ASCII">
+            <summary>
+            The ASCII (plain text) emulation type
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.DoorEmulationType.ANSI">
+            <summary>
+            The ANSI (coloured) emulation type
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.DoorKey">
+            <summary>
+            Special keys that can be returned by ReadKey()
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.DoorKey.DownArrow">
+            <summary>
+            The down arrow key
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.DoorKey.LeftArrow">
+            <summary>
+            The left arrow key
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.DoorKey.RightArrow">
+            <summary>
+            The right arrow key
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.DoorKey.UpArrow">
+            <summary>
+            The up arrow key
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.DoorKeyLocation">
+            <summary>
+            The available locations a key could have been pressed at
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.DoorKeyLocation.None">
+            <summary>
+            A key has not yet been pressed
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.DoorKeyLocation.Local">
+            <summary>
+            The key was pressed on the local keyboard
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.DoorKeyLocation.Remote">
+            <summary>
+            The key was pressed on the remote terminal
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.TDropInfo">
+            <summary>
+            When a dropfile is read there is some useless information so it is not
+            necessary to store the whole thing in memory.  Instead only certain
+            parts are saved to this record
+            
+            Supported Dropfiles
+            D = Found In DOOR32.SYS
+            I = Found In INFO.*
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.Access">
+            <summary>
+            User's access level.  DOOR32.SYS only
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.Alias">
+            <summary>
+            User's alias.  DOOR32.SYS and INFO.*
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.Baud">
+            <summary>
+            Connection baud rate.  DOOR32.SYS and INFO.*
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.Clean">
+            <summary>
+            Is LORD in "clean" mode?  INFO.* only
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.ComType">
+            <summary>
+            Com type (0=local, 1=serial, 2=telnet, 3=rlogin, 4=websocket)  DOOR32.SYS only
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.Emulation">
+            <summary>
+            User's emulation (ANSI or ASCII)  DOOR32.SYS and INFO.*
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.Fairy">
+            <summary>
+            Does user have a fairy?  INFO.* only
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.MaxTime">
+            <summary>
+            Total seconds user has this session.  DOOR32.SYS and INFO.*
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.Node">
+            <summary>
+            Node number.  DOOR32.SYS only
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.RealName">
+            <summary>
+            User's real name.  DOOR32.SYS and INFO.*
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.RecPos">
+            <summary>
+            User's user file record position (0 based)  DOOR32.SYS and INFO.*
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.Registered">
+            <summary>
+            Is LORD registered?  INFO.* only
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TDropInfo.SocketHandle">
+            <summary>
+            Socket handle.  DOOR32.SYS and INFO.*
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.TLastKey">
+            <summary>
+            Information about the last key pressed is stored in this record.
+            This should be considered read-only.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TLastKey.Ch">
+            <summary>
+            Character code for last key that was pressed
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TLastKey.Extended">
+            <summary>
+            Was the last keypress an extended key (ie cursor or F1, etc)
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TLastKey.Location">
+            <summary>
+            Which side pressed the last key (LOCAL or REMOTE)
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TLastKey.Time">
+            <summary>
+            The time the last key was pressed
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.TMOREPrompt">
+            <summary>
+            MORE prompts will use these two lines based on whether use has ANSI or ASCII
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TMOREPrompt.ANSI">
+            <summary>
+            The ANSI prompt to use for the More() method
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TMOREPrompt.ANSILength">
+            <summary>
+            The visible length of the ANSI prompt (needed to ensure it gets erased correctly)
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TMOREPrompt.ASCII">
+            <summary>
+            The ASCII prompt to use for the More() method
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.TSession">
+            <summary>
+            Information about the current session is stored in this record.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TSession.DoIdleCheck">
+            <summary>
+            Run the idle warning and timeout events?
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TSession.Events">
+            <summary>
+            Run the various door related events?  (ie time warning, time up, update status bar, etc)
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TSession.EventsTime">
+            <summary>
+            The time the events last ran (used to ensure events only fire once per second)
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TSession.MaxIdle">
+            <summary>
+            The maximum amount of seconds a user can idle before they're booted
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TSession.TimeOn">
+            <summary>
+            The time the door was launched
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.RMSecureString.op_Implicit(System.String)~RandM.RMLib.RMSecureString">
+            <summary>
+            Creates RMSecureString object from plain text provided
+            Called for example when using:
+            RMSecureString rmss = "test";
+            </summary>
+            <param name="rhs">Plain text to initialize the RMSecureString to hold</param>
+            <returns>new RMSecureString</returns>
+        </member>
+        <member name="M:RandM.RMLib.RMSecureString.op_Implicit(System.Security.SecureString)~RandM.RMLib.RMSecureString">
+            <summary>
+            Creates RMSecureString object from RMSecureString provided
+            Called for example when using:
+            SecureString ss = new SecureString();
+            ss.AppendChar('x');
+            RMSecureString rmss = ss;
+            </summary>
+            <param name="secureString">RMSecureString to initialize the RMSecureString to hold</param>
+            <returns>new RMSecureString</returns>
+        </member>
+        <member name="M:RandM.RMLib.RMSecureString.GetEncryptedString(RandM.RMLib.RMSecureString)">
+            <summary>
+            Encrypt the current SecureString with the AES encryption algorithm, returning the computed value as a base64 string
+            </summary>
+            <returns>A base64 encoded string of the encrypted version of the current SecureString</returns>
+            <remarks>Based on the code from Sly Gryphon's comment at http://weblogs.asp.net/pglavich/archive/2006/10/29/Secure-TextBox-Updated.aspx </remarks>
+        </member>
+        <member name="M:RandM.RMLib.RMSecureString.GetHashedString(System.Byte[])">
+            <summary>
+            Hash the current SecureString with the SHA512 hash algorithm and saltBytes, returning the computed value as a base64 string
+            </summary>
+            <param name="saltBytes">The salt to apply to the hash</param>
+            <returns>A base64 encoded hash of the current SecureString</returns>
+            <remarks>Based on the code from Sly Gryphon's comment at http://weblogs.asp.net/pglavich/archive/2006/10/29/Secure-TextBox-Updated.aspx </remarks>
+        </member>
+        <member name="M:RandM.RMLib.RMSecureString.GetProtectedString(RandM.RMLib.RMSecureString)">
+            <summary>
+            Encrypt the current SecureString with the ProtectData API, returning the computed value as a base64 string
+            </summary>
+            <returns>A base64 encoded string of the protected version of the current SecureString</returns>
+            <remarks>Based on the code from Sly Gryphon's comment at http://weblogs.asp.net/pglavich/archive/2006/10/29/Secure-TextBox-Updated.aspx </remarks>
+        </member>
+        <member name="T:RandM.RMLib.CrtPanel.BorderStyle">
+            <summary>
+            Different border styles used by the CrtPanel class
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.CrtPanel.BorderStyle.Single">
+            <summary>
+            Single lines all around
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.CrtPanel.BorderStyle.Double">
+            <summary>
+            Double lines all around
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.CrtPanel.BorderStyle.SingleH">
+            <summary>
+            Single lines horizontally, double lines vertically
+            </summary>
+            <see>DoubleV</see>
+        </member>
+        <member name="F:RandM.RMLib.CrtPanel.BorderStyle.SingleV">
+            <summary>
+            Single lines vertically, double lines horizontally
+            </summary>
+            <see>DoubleH</see>
+        </member>
+        <member name="F:RandM.RMLib.CrtPanel.BorderStyle.DoubleH">
+            <summary>
+            Double lines horizontally, single lines vertically
+            </summary>
+            <see>SingleV</see>
+        </member>
+        <member name="F:RandM.RMLib.CrtPanel.BorderStyle.DoubleV">
+            <summary>
+            Double lines vertically, single lines horizontally
+            </summary>
+            <see>SingleH</see>
+        </member>
+        <member name="M:RandM.RMLib.CrtProgressBar.#ctor(RandM.RMLib.CrtControl,System.Int32,System.Int32,System.Int32,RandM.RMLib.CrtProgressBar.ProgressBarStyle)">
+            <summary>
+            Initializes a progress bar with the given name and details, and draws the 0% progress to the screen
+            </summary>
+            <param name="AX">The x coordinate of the bar</param>
+            <param name="AY">The y coordinate of the bar</param>
+            <param name="AWidth">The width of the bar</param>
+            <param name="AStyle">The style of the bar</param>
+            <param name="AFG">The foreground colour of the completed bar</param>
+            <param name="ABG">The background colour of the bar</param>
+            <param name="AShaded">The foreground colour of the uncompleted bar</param>
+        </member>
+        <member name="M:RandM.RMLib.CrtProgressBar.Paint(System.Boolean)">
+            <summary>
+            Re-Draw the bar and percent text.
+            </summary>
+            <param name="AForce">When true, the bar and percent will always be Paintn.  When false, the bar and percent will only be Paintn as necessary, which reduces the number of unnecessary Paints (especially when a large maximum is used)</param>
+        </member>
+        <member name="M:RandM.RMLib.FileUtils.DirectoryDelete(System.String)">
+            <summary>
+            DirectoryDelete is an exception ignoring wrapper for System.IO.Directory.Delete()
+            </summary>
+            <param name="directoryName">The name of the directory to delete</param>
+        </member>
+        <member name="M:RandM.RMLib.FileUtils.FileDelete(System.String)">
+            <summary>
+            FileDelete is an exception ignoring wrapper for System.IO.File.Delete()
+            </summary>
+            <param name="fileName">The name of the file to delete</param>
+        </member>
+        <member name="T:RandM.RMLib.IniFile">
+            <summary>
+            Provides read/write access to .INI configuration files
+            </summary>
+            <remarks>
+            To prevent disk thrashing changes are buffered until the class is disposed unless:
+             - Custom constructor passes TRUE for AAutoSave parameter
+             - Property AutoSave is changed to TRUE
+             - Save() is called manually
+            </remarks>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.#ctor(System.String)">
+            <summary>
+            Default constructor to load the given INI into memory
+            </summary>
+            <param name="fileName">The INI to load</param>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.#ctor(System.String,RandM.RMLib.RMSecureString)">
+            <summary>
+            Custom constructor to load the given INI into memory, and indicate whether the changes should be buffered or immediately written to disk
+            </summary>
+            <param name="fileName">The INI to load</param>
+            <param name="password">The password used to encrypt/decrypt the contents of the INI file</param>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.Dispose">
+            <summary>
+            Handle saving the INI to disk at disposal (if there were modifications)
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.Dispose(System.Boolean)">
+            <summary>
+            Handle saving the INI to disk at disposal (if there were modifications)
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.DeleteKey(System.String,System.String)">
+            <summary>
+            Remove the given key (and it's value) from the given section
+            </summary>
+            <param name="sectionName">The section containing the key to remove</param>
+            <param name="keyName">The key to remove</param>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.EraseSection(System.String)">
+            <summary>
+            Remove the given section (along with all the keys+values) from the INI
+            </summary>
+            <param name="sectionName">The section to remove</param>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.KeyExists(System.String,System.String)">
+            <summary>
+            Check whether a given section exists in the INI
+            </summary>
+            <param name="sectionName">The section to look in</param>
+            <param name="keyName">The key to look for</param>
+            <returns>TRUE = section and key exists, FALSE = it does not exist</returns>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.ReadSection(System.String)">
+            <summary>
+            Returns a string array of all the keys in the given section
+            </summary>
+            <param name="sectionName">The section to retrieve keys from</param>
+            <returns>The keys in the given section</returns>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.ReadSections">
+            <summary>
+            Returns a string array of all the sections in the INI
+            </summary>
+            <returns>The sections in the INI</returns>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.ReadString(System.String,System.String,System.String)">
+            <summary>
+            Reads a string from the given key in the given section, using the provided default if the key does not exist
+            </summary>
+            <param name="sectionName">The section to look in</param>
+            <param name="keyName">The key to retrieve the value for</param>
+            <param name="defaultValue">The value to use if the key cannot be found</param>
+            <returns></returns>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.SectionExists(System.String)">
+            <summary>
+            Check whether a given section exists in the INI
+            </summary>
+            <param name="sectionName">The section to look for</param>
+            <returns>TRUE = section exists, FALSE = it does not exist</returns>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.Save">
+            <summary>
+            Default method to manually save the INI to disk, using the filename that was used when opening the ini
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.Save(System.String)">
+            <summary>
+            Custom method to manually save the INI to disk, using the provided filename
+            </summary>
+            <remarks>
+            The old INI is left untouched, and does not get deleted
+            </remarks>
+            <param name="AFileName">The new filename to save the INI as</param>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.WriteString(System.String,System.String,System.String)">
+            <summary>
+            Adds the given value to the given key in the given section
+            </summary>
+            <param name="sectionName">The section to add the value to</param>
+            <param name="keyName">The key to add the value to</param>
+            <param name="defaultValue">The value to be added</param>
+        </member>
+        <member name="M:RandM.RMLib.IniFile.WriteString(System.String,System.String,System.Collections.IList)">
+            <summary>
+            Adds the given value array to the given key in the given section
+            </summary>
+            <param name="sectionName">The section to add the value to</param>
+            <param name="keyName">The key to add the value to</param>
+            <param name="defaultValue">The value array to be added</param>
+        </member>
+        <member name="P:RandM.RMLib.IniFile.AutoSave">
+            <summary>
+            Controls whether changes are buffered (=false) or immediately written to disk (=true)
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.IniFile.HeaderComment">
+            <summary>
+            The comment block that was read from / to be written to the top of the INI file
+            </summary>
+            <remarks>
+            If a comment is found at the top of an INI file, it is assumed to be a header comment, and so is not associated with the first section.  This may not be correct behaviour, but the alternative is to associate the first comment with the first section, but then that comment will be removed if the first section is removed, which would be bad if the first comment really was a header comment
+            </remarks>
+        </member>
+        <member name="T:RandM.RMLib.JSON">
+            <summary>
+            This class encodes and decodes JSON strings.
+            Spec. details, see http://www.json.org/
+            
+            JSON uses Arrays and Objects. These correspond here to the datatypes ArrayList and Hashtable.
+            All numbers are parsed to doubles.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.JSON.lastErrorIndex">
+            <summary>
+            On decoding, this value holds the position at which the parse failed (-1 = no error).
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.JSON.JsonDecode(System.String)">
+            <summary>
+            Parses the string json into a value
+            </summary>
+            <param name="json">A JSON string.</param>
+            <returns>An ArrayList, a Hashtable, a double, a string, null, true, or false</returns>
+        </member>
+        <member name="M:RandM.RMLib.JSON.JsonEncode(System.Object)">
+            <summary>
+            Converts a Hashtable / ArrayList object into a JSON string
+            </summary>
+            <param name="json">A Hashtable / ArrayList</param>
+            <returns>A JSON encoded string, or null if object 'json' is not serializable</returns>
+        </member>
+        <member name="M:RandM.RMLib.JSON.LastDecodeSuccessful">
+            <summary>
+            On decoding, this function returns the position at which the parse failed (-1 = no error).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RandM.RMLib.JSON.GetLastErrorIndex">
+            <summary>
+            On decoding, this function returns the position at which the parse failed (-1 = no error).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RandM.RMLib.JSON.GetLastErrorSnippet">
+            <summary>
+            If a decoding error occurred, this function returns a piece of the JSON string 
+            at which the error took place. To ease debugging.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RandM.RMLib.JSON.IsNumeric(System.Object)">
+            <summary>
+            Determines if a given object is numeric in any way
+            (can be integer, double, etc). C# has no pretty way to do this.
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.NativeMethods">
+            <summary>
+            Constants, enumerations, methods, and structures required for certain PInvoke calls
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.Command.FIONREAD">
+            <summary>
+            Use to determine the amount of data pending in the network's input buffer that can be read from socket s.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.Command.FIONBIO">
+            <summary>
+            The *argp parameter is a pointer to an unsigned long value.
+            Set *argp to a nonzero value if the nonblocking mode should be enabled,
+            or zero if the nonblocking mode should be disabled.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.Command.SIOCATMARK">
+            <summary>
+            Use to determine if all out of band (OOB) data has been read.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.CreationDisposition.New">
+            <summary>
+            Creates a new file. The function fails if a specified file exists.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.CreationDisposition.CreateAlways">
+            <summary>
+            Creates a new file, always.
+            If a file exists, the function overwrites the file, clears the existing attributes, combines the specified file attributes,
+            and flags with FILE_ATTRIBUTE_ARCHIVE, but does not set the security descriptor that the SECURITY_ATTRIBUTES structure specifies.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.CreationDisposition.OpenExisting">
+            <summary>
+            Opens a file. The function fails if the file does not exist.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.CreationDisposition.OpenAlways">
+            <summary>
+            Opens a file, always.
+            If a file does not exist, the function creates a file as if dwCreationDisposition is CREATE_NEW.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.CreationDisposition.TruncateExisting">
+            <summary>
+            Opens a file and truncates it so that its size is 0 (zero) bytes. The function fails if the file does not exist.
+            The calling process must open the file with the GENERIC_WRITE access right.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.FileAccess.GenericRead">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.FileAccess.GenericWrite">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.FileAccess.GenericExecute">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.FileAccess.GenericAll">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.FileAccess.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.FileShare.None">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.FileShare.Read">
+            <summary>
+            Enables subsequent open operations on an object to request read access.
+            Otherwise, other processes cannot open the object if they request read access.
+            If this flag is not specified, but the object has been opened for read access, the function fails.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.FileShare.Write">
+            <summary>
+            Enables subsequent open operations on an object to request write access.
+            Otherwise, other processes cannot open the object if they request write access.
+            If this flag is not specified, but the object has been opened for write access, the function fails.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.FileShare.Delete">
+            <summary>
+            Enables subsequent open operations on an object to request delete access.
+            Otherwise, other processes cannot open the object if they request delete access.
+            If this flag is not specified, but the object has been opened for delete access, the function fails.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.MsgFlags.MSG_OOB">
+            <summary>
+            Processes Out Of Band (OOB) data.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.MsgFlags.MSG_PEEK">
+            <summary>
+            Peeks at the incoming data. The data is copied into the buffer,
+            but is not removed from the input queue.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.MsgFlags.MSG_DONTROUTE">
+            <summary>
+            send without using routing tables
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.MsgFlags.MSG_WAITALL">
+            <summary>
+            The receive request will complete only when one of the following events occurs:
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.MsgFlags.MSG_PARTIAL">
+            <summary>
+            partial send or recv for message xport
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.NativeMethods.MsgFlags.MSG_DONTWAIT">
+            <summary>
+            ???? ... ???
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.NativeMethods.WIN32_FIND_DATA">
+            <summary>
+            Contains information about the file that is found 
+            by the FindFirstFile or FindNextFile functions.
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.NativeMethods.WIN32_FIND_DATA.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </returns>
+        </member>
+        <member name="T:RandM.RMLib.NativeMethods.SafeFindHandle">
+            <summary>
+            Wraps a FindFirstFile handle.
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.NativeMethods.SafeFindHandle.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RandM.RMLib.NativeMethods.SafeFindHandle"/> class.
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.NativeMethods.SafeFindHandle.ReleaseHandle">
+            <summary>
+            When overridden in a derived class, executes the code required to free the handle.
+            </summary>
+            <returns>
+            true if the handle is released successfully; otherwise, in the 
+            event of a catastrophic failure, false. In this case, it 
+            generates a releaseHandleFailed MDA Managed Debugging Assistant.
+            </returns>
+        </member>
+        <member name="T:RandM.RMLib.Ansi">
+            <summary>
+            The Ansi class is used for parsing and displaying ANSI formatted text to the
+            console window.  Relies on the Crt unit for display.
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.AnsiParserState">
+            <summary>
+            The possible states the ANSI parser may find itself in
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.AnsiParserState.None">
+            <summary>
+            The default data state
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.AnsiParserState.Escape">
+            <summary>
+            The last received character was an ESC
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.AnsiParserState.Bracket">
+            <summary>
+            The last received character was a [
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.Crt">
+            <summary>
+            A static class for manipulating a console window
+            Compatibility with the Borland Pascal CRT unit was attempted, along with a few new additions
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.Crt.AssignCrt(System.Object)">
+            <summary>
+            Associates a text file with the CRT window.
+            </summary>
+            <remarks>
+            AssignCrt works exactly like the Assign standard procedure except that no
+            file name is specified. Instead, the text file is associated with the CRT.
+            
+            This allows faster output (and input) than would normally be possible using
+            standard output (or input).
+            </remarks>
+            <param name="F">The text file to associate with the CRT window</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ClrBol">
+             <summary>
+             Clears all characters from the cursor position to the start of the line
+             without moving the cursor.
+             </summary>
+             <remarks>
+             All character positions are set to blanks with the currently defined text
+             attributes. Thus, if TextBackground is not black, the current cursor
+             position to the left edge becomes the background color.
+            
+             ClrBol is window-relative.
+             </remarks>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ClrBos">
+             <summary>
+             Clears the active window from the cursor's current line to the start of the window
+             </summary>
+             <remarks>
+             Sets all character positions from the cursor's current line to the start of the window
+             to blanks with the currently defined text attributes. Thus, if TextBackground is not
+             black, the entire screen becomes the background color. This also applies to characters 
+             cleared by ClrEol, InsLine, and DelLine, and to empty lines created by scrolling.
+            
+             ClrBos is window-relative.
+             </remarks>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ClrEol">
+             <summary>
+             Clears all characters from the cursor position to the end of the line
+             without moving the cursor.
+             </summary>
+             <remarks>
+             All character positions are set to blanks with the currently defined text
+             attributes. Thus, if TextBackground is not black, the current cursor
+             position to the right edge becomes the background color.
+            
+             ClrEol is window-relative.
+             </remarks>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ClrEos">
+             <summary>
+             Clears the active window from the cursor's current line to the end of the window
+             </summary>
+             <remarks>
+             Sets all character positions from the cursor's current line to the end of the window
+             to blanks with the currently defined text attributes. Thus, if TextBackground is not
+             black, the entire screen becomes the background color. This also applies to characters 
+             cleared by ClrEol, InsLine, and DelLine, and to empty lines created by scrolling.
+            
+             ClrEos is window-relative.
+             </remarks>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ClrLine">
+             <summary>
+             Clears all characters from the cursor position's current line
+             without moving the cursor.
+             </summary>
+             <remarks>
+             All character positions are set to blanks with the currently defined text
+             attributes. Thus, if TextBackground is not black, the current cursor
+             position's line becomes the background color.
+            
+             ClrLine is window-relative.
+             </remarks>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ClrScr">
+             <summary>
+             Clears the active windows and returns the cursor to the upper-left corner.
+             </summary>
+             <remarks>
+             Sets all character positions to blanks with the currently defined text
+             attributes. Thus, if TextBackground is not black, the entire screen becomes
+             the background color. This also applies to characters cleared by ClrEol,
+             InsLine, and DelLine, and to empty lines created by scrolling.
+            
+             ClrScr is window-relative.
+             </remarks>
+        </member>
+        <member name="M:RandM.RMLib.Crt.Conceal">
+            <summary>
+            Sets the foreground colour to be the same as the background colour
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.Crt.Delay(System.Int32)">
+             <summary>
+             Delays a specified number of milliseconds.
+             </summary>
+             <remarks>
+             Ms specifies the number of milliseconds to wait.
+            
+             Delay is an approximation, so the delay period will not last exactly Ms
+             milliseconds.
+             </remarks>
+             <param name="milliseconds">The number of milliseconds to wait</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.DelLine">
+             <summary>
+             Deletes the line containing the cursor.
+             </summary>
+             <remarks>
+             The line containing the cursor is deleted, and all lines below are moved one
+             line up (using the BIOS scroll routine). A new line is added at the bottom.
+            
+             All character positions are set to blanks with the currently defined text
+             attributes. Thus, if TextBackground is not black, the new line becomes the
+             background color.
+             </remarks>
+        </member>
+        <member name="M:RandM.RMLib.Crt.DelLine(System.Int32)">
+             <summary>
+             Deletes the line containing the cursor.
+             </summary>
+             <remarks>
+             The line containing the cursor is deleted, and all lines below are moved one
+             line up (using the BIOS scroll routine). A new line is added at the bottom.
+            
+             All character positions are set to blanks with the currently defined text
+             attributes. Thus, if TextBackground is not black, the new line becomes the
+             background color.
+             </remarks>
+             <param name="count">The number of lines to delete</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.FastWrite(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Writes a string of text at the desired X/Y coordinate with the given text attribute.
+            
+            FastWrite is not window-relative, and it does not wrap text that goes beyond the right edge of the screen.
+            </summary>
+            <param name="text">The text to write</param>
+            <param name="column">The 1-based column to start the text</param>
+            <param name="row">The 1-based row to start the text</param>
+            <param name="attribute">The text attribute to colour the text</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.GetAttrAt(System.Int32,System.Int32)">
+            <summary>
+            Retrieves the text attribute at the given X/Y coordinate.
+            
+            GetAttrAt is not window-relative.
+            </summary>
+            <param name="column">The 1-based column to look at</param>
+            <param name="row">The 1-based row to look at</param>
+            <returns>The text attribute at the given X/Y coordinate</returns>
+        </member>
+        <member name="M:RandM.RMLib.Crt.GetCharAt(System.Int32,System.Int32)">
+            <summary>
+            Retrieves the character at the given X/Y coordinate.
+            
+            GetCharAt is not window-relative.
+            </summary>
+            <param name="column">The 1-based column to look at</param>
+            <param name="row">The 1-based row to look at</param>
+            <returns>The character at the given X/Y coordinate</returns>
+        </member>
+        <member name="M:RandM.RMLib.Crt.GotoXY(System.Int32,System.Int32)">
+            <summary>
+            Moves the cursor to the given coordinates within the virtual screen.
+            </summary>
+            <remarks>
+            The upper-left corner of the virtual screen corresponds to (1, 1).
+            
+            GotoXY is window-relative.
+            </remarks>
+            <param name="column">The 1-based column to move to</param>
+            <param name="row">The 1-based row to move to</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.HideConsole">
+            <summary>
+            Hides the console window (restore it with Show())
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.Crt.HighVideo">
+            <summary>
+            Selects high-intensity characters.
+            </summary>
+            <remarks>
+            There is a Byte variable in Crt TextAttr that is used to hold the current
+            video attribute. HighVideo sets the high intensity bit of TextAttr's
+            fore-ground color, thus mapping colors 0-7 onto colors 8-15.
+            </remarks>
+        </member>
+        <member name="M:RandM.RMLib.Crt.InsLine">
+             <summary>
+             Inserts an empty line at the cursor position.
+             </summary>
+             <remarks>
+             All lines below the inserted line are moved down one line, and the bottom
+             line scrolls off the screen (using the BIOS scroll routine).
+            
+             All character positions are set to blanks with the currently defined text
+             attributes. Thus, if TextBackground is not black, the new line becomes the
+             background color.
+             
+             InsLine is window-relative.
+             </remarks>
+        </member>
+        <member name="M:RandM.RMLib.Crt.InsLine(System.Int32)">
+             <summary>
+             Inserts an empty line at the cursor position.
+             </summary>
+             <remarks>
+             All lines below the inserted line are moved down one line, and the bottom
+             line scrolls off the screen (using the BIOS scroll routine).
+            
+             All character positions are set to blanks with the currently defined text
+             attributes. Thus, if TextBackground is not black, the new line becomes the
+             background color.
+             
+             InsLine is window-relative.
+             </remarks>
+             <param name="count">The number of lines to insert</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.KeyPressed">
+            <summary>
+            Determines if a key has been pressed on the keyboard.
+            </summary>
+            The key can be read using the ReadKey function.
+            <remarks>
+            </remarks>
+            <returns>True If key has been pressed False If key has not been pressed</returns>
+        </member>
+        <member name="M:RandM.RMLib.Crt.LowVideo">
+            <summary>
+            Selects low intensity characters.
+            </summary>
+            <remarks>
+            There is a Byte variable in Crt--TextAttr--that holds the current video
+            attribute. LowVideo clears the high-intensity bit of TextAttr's foreground
+            color, thus mapping colors 8 to 15 onto colors 0 to 7.
+            </remarks>
+        </member>
+        <member name="M:RandM.RMLib.Crt.NormVideo">
+            <summary>
+            Selects the original text attribute read from the cursor location at startup.
+            </summary>
+            <remarks>
+            There is a Byte variable in Crt--TextAttr--that holds the current video
+            attribute. NormVideo restores TextAttr to the value it had when the program
+            was started.
+            </remarks>
+        </member>
+        <member name="M:RandM.RMLib.Crt.NoSound">
+            <summary>
+            Turns off the computer's internal speaker.
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ReadKey">
+            <summary>
+            Reads a character from the keyboard.
+            </summary>
+            <remarks>
+            The character is not echoed to the screen.
+            </remarks>
+            <returns>Returns a character or an extended scan code.</returns>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ReadLn(System.String@)">
+            <summary>
+            Reads a line of text from the keyboard.
+            </summary>
+            <returns>Returns a string of text</returns>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ReverseVideo">
+            <summary>
+            Reverses the foreground and background text attributes
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ScrollDownCustom(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Char,System.Int32)">
+            <summary>
+            Scrolls the given window down the given number of lines (leaving blank lines at the top), filling the void with the given character with the given text attribute
+            </summary>
+            <param name="AX1">The 0-based left column of the window</param>
+            <param name="AY1">The 0-based top row of the window</param>
+            <param name="AX2">The 0-based right column of the window</param>
+            <param name="AY2">The 0-based bottom row of the window</param>
+            <param name="ALines">The number of lines to scroll</param>
+            <param name="ACh">The character to fill the void with</param>
+            <param name="AAttr">The text attribute to fill the void with</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ScrollDownScreen(System.Int32)">
+            <summary>
+            Scrolls the screen down the given number of lines (leaving blanks at the top)
+            </summary>
+            <param name="count">The number of lines to scroll</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ScrollDownWindow(System.Int32)">
+            <summary>
+            Scrolls the current window down the given number of lines (leaving blanks at the top)
+            </summary>
+            <param name="count">The number of lines to scroll</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ScrollUpCustom(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Char,System.Int32)">
+            <summary>
+            Scrolls the given window up the given number of lines (leaving blank lines at the bottom), filling the void with the given character with the given text attribute
+            </summary>
+            <param name="AX1">The 0-based left column of the window</param>
+            <param name="AY1">The 0-based top row of the window</param>
+            <param name="AX2">The 0-based right column of the window</param>
+            <param name="AY2">The 0-based bottom row of the window</param>
+            <param name="ALines">The number of lines to scroll</param>
+            <param name="ACh">The character to fill the void with</param>
+            <param name="AAttr">The text attribute to fill the void with</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ScrollUpScreen(System.Int32)">
+            <summary>
+            Scrolls the screen up the given number of lines (leaving blanks at the bottom)
+            </summary>
+            <param name="count">The number of lines to scroll</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ScrollUpWindow(System.Int32)">
+            <summary>
+            Scrolls the current window up the given number of lines (leaving blanks at the bottom)
+            </summary>
+            <param name="count">The number of lines to scroll</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.ShowConsole">
+            <summary>
+            Shows the console window (useful after calling Hide())
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.Crt.Sound(System.Int32)">
+            <summary>
+            Starts the internal speaker.
+            </summary>
+            <remarks>
+            Hz specifies the frequency of the emitted sound in hertz. The speaker
+            continues until explicitly turned off by a call to NoSound.
+            </remarks>
+            <param name="frequency">The frequency of the emitted sound in hertz</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.TextBackground(System.Int32)">
+             <summary>
+             Selects the background color.
+             </summary>
+             <remarks>
+             Color is an integer expression in the range 0..7, corresponding to one of
+             the first eight text color constants. There is a byte variable in
+             Crt--TextAttr--that is used to hold the current video attribute.
+             TextBackground sets bits 4-6 of TextAttr to Color.
+            
+             The background of all characters subsequently written will be in the
+             specified color.
+             </remarks>
+             <param name="colour">The colour to set the background to</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.TextColor(System.Int32)">
+             <summary>
+             Selects the foreground character color.
+             </summary>
+             <remarks>
+             Color is an integer expression in the range 0..15, corresponding to one of
+             the text color constants defined in Crt.
+            
+             There is a byte-type variable Crt--TextAttr--that is used to hold the
+             current video attribute. TextColor sets bits 0-3 to Color. If Color is
+             greater than 15, the blink bit (bit 7) is also set; otherwise, it is
+             cleared.
+            
+             You can make characters blink by adding 128 to the color value. The Blink
+             constant is defined for that purpose; in fact, for compatibility with Turbo
+             Pascal 3.0, any Color value above 15 causes the characters to blink. The
+             foreground of all characters subsequently written will be in the specified
+             color.
+             </remarks>
+             <param name="colour">The colour to set the foreground to</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.TextMode(System.Int32)">
+            <summary>
+            Selects a specific text mode.
+            </summary>
+            <remarks>
+            When TextMode is called, the current window is reset to the entire screen,
+            DirectVideo is set to True, CheckSnow is set to True if a color mode was
+            selected, the current text attribute is reset to normal corresponding to a
+            call to NormVideo, and the current video is stored in LastMode. In addition,
+            LastMode is initialized at program startup to the then-active video mode.
+            </remarks>
+            <param name="mode"></param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.WhereX">
+            <summary>
+            Returns the CP's X coordinate of the current cursor location.
+            </summary>
+            <remarks>
+            WhereX is window-specific.
+            </remarks>
+            <returns>The 1-based column of the window the cursor is currently in</returns>
+        </member>
+        <member name="M:RandM.RMLib.Crt.WhereXA">
+            <summary>
+            Returns the CP's X coordinate of the current cursor location.
+            </summary>
+            <remarks>
+            WhereXA is not window-specific.
+            </remarks>
+            <returns>The 1-based column of the screen the cursor is currently in</returns>
+        </member>
+        <member name="M:RandM.RMLib.Crt.WhereY">
+            <summary>
+            Returns the CP's Y coordinate of the current cursor location.
+            </summary>
+            <remarks>
+            WhereY is window-specific.
+            </remarks>
+            <returns>The 1-based row of the window the cursor is currently in</returns>
+        </member>
+        <member name="M:RandM.RMLib.Crt.WhereYA">
+            <summary>
+            Returns the CP's Y coordinate of the current cursor location.
+            </summary>
+            <remarks>
+            WhereYA is now window-specific.
+            </remarks>
+            <returns>The 1-based row of the screen the cursor is currently in</returns>
+        </member>
+        <member name="M:RandM.RMLib.Crt.Window(System.Int32,System.Int32,System.Int32,System.Int32)">
+             <summary>
+             Defines a text window on the screen.
+             </summary>
+             <remarks>
+             X1 and Y1 are the coordinates of the upper left corner of the window, and X2
+             and Y2 are the coordinates of the lower right corner. The upper left corner
+             of the screen corresponds to (1, 1). The minimum size of a text window is
+             one column by one line. If the coordinates are invalid in any way, the call
+             to Window is ignored.
+            
+             The default window is (1, 1, 80, 25) in 25-line mode, and (1, 1, 80, 43) in
+             43-line mode, corresponding to the entire screen.
+            
+             All screen coordinates (except the window coordinates themselves) are
+             relative to the current window. For instance, GotoXY(1, 1) will always
+             position the cursor in the upper left corner of the current window.
+            
+             Many Crt procedures and functions are window-relative, including ClrEol,
+             ClrScr, DelLine, GotoXY, InsLine, WhereX, WhereY, Read, Readln, Write,
+             Writeln.
+            
+             WindMin and WindMax store the current window definition. A call to the
+             Window procedure always moves the cursor to (1, 1).
+             </remarks>
+             <param name="left">The 1-based left column of the window</param>
+             <param name="top">The 1-based top row of the window</param>
+             <param name="right">The 1-based right column of the window</param>
+             <param name="bottom">The 1-based bottom row of the window</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.Write(System.String)">
+            <summary>
+            Writes a given line of text to the screen.
+            </summary>
+            <remarks>
+            Text is wrapped if it exceeds the right edge of the window
+            </remarks>
+            <param name="text">The text to print to the screen</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.WriteLn">
+            <summary>
+            Writes a carriage return and line feed.
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.Crt.WriteLn(System.String)">
+            <summary>
+            Writes a given line of text to the screen, followed by a carriage return and line feed.
+            </summary>
+            <remarks>
+            Text is wrapped if it exceeds the right edge of the window
+            </remarks>
+            <param name="text">The text to print to the screen</param>
+        </member>
+        <member name="M:RandM.RMLib.Crt.SetFontSize(System.Int32,System.Int32)">
+            <summary>
+            Try to set the console font size to characters with the given X and Y size
+            </summary>
+            <param name="width">The horizontal size</param>
+            <param name="height">The vertical size</param>
+            <returns>True if the size was found and set, False if the size was not available</returns>
+        </member>
+        <member name="P:RandM.RMLib.Crt.CheckBreak">
+             <summary>
+             Controls user termination of an application using the CRT window.
+             </summary>
+             <remarks>
+             When CheckBreak is True, the user can terminate the application at any time
+             by
+              - choosing the Close command on the CRT window's Control menu
+              - double-clicking the window's Control-menu box
+              - pressing Alt+F4
+                pressing Ctrl-Break
+            
+             The user can also press Ctrl+C or Ctrl+Break at any time to halt the
+             application and force the CRT window into its inactive state.
+            
+             All of these features are disabled when CheckBreak is False.
+            
+             At run time, Crt stores the old Ctrl-Break interrupt vector, $1B, in a
+             global pointer called SaveInt1B.
+             </remarks>
+        </member>
+        <member name="P:RandM.RMLib.Crt.CheckEof">
+             <summary>
+             Controls the end-of-file character checking in the CRT window.
+             </summary>
+             <remarks>
+             When CheckEOF is True, an end-of-file marker is generated when the user
+             presses Ctrl+Z while reading from a file assigned to the CRT window.
+            
+             When CheckEOF is False, pressing Ctrl+Z has no effect.
+            
+             CheckEOF is False by default.
+             </remarks>
+        </member>
+        <member name="P:RandM.RMLib.Crt.DirectVideo">
+             <summary>
+             Enables and disables direct memory access for Write and WriteLn statements
+             that output to the screen
+             </summary>
+             <remarks>
+             When DirectVideo is True, Writes and WriteLns to files associated with the
+             CRT will store characters directly in video memory, instead of calling the
+             BIOS to display them.
+            
+             When DirectVideo is False, all characters are written through BIOS calls, a
+             significantly slower process.
+            
+             DirectVideo always defaults to True.
+            
+             If you want characters displayed through BIOS calls, set DirectVideo to
+             False at the beginning of your program and after each call to TextMode.
+             </remarks>
+        </member>
+        <member name="P:RandM.RMLib.Crt.LastMode">
+            <summary>
+            Each time TextMode is called, the current video mode is stored in LastMode.
+            </summary>
+            <remarks>
+            Also, LastMode is initialized at program startup to the then-active video mode.
+            </remarks>
+        </member>
+        <member name="P:RandM.RMLib.Crt.TextAttr">
+             <summary>
+             Stores currently selected text attributes
+             </summary>
+             <remarks>
+             The text attributes are normally set through calls to TextColor and
+             TextBackground.
+            
+             However, you can also set them by directly storing a value in TextAttr.
+             </remarks>
+        </member>
+        <member name="P:RandM.RMLib.Crt.WindCols">
+            <summary>
+            The number of columns found in the currently defined window
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.Crt.WindMax">
+            <summary>
+            The 0-based lower right coordinate of the current window
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.Crt.WindMaxX">
+            <summary>
+            The 0-based left column of the current window
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.Crt.WindMaxY">
+            <summary>
+            The 0-based right column of the current window
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.Crt.WindMin">
+            <summary>
+            The 0-based upper left coordinate of the current window
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.Crt.WindMinX">
+            <summary>
+            The 0-based top row of the current window
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.Crt.WindMinY">
+            <summary>
+            The 0-based bottom row of the current window
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.Crt.WindRows">
+            <summary>
+            The number of rows found in the currently defined window
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.ConfigHelper">
+            <summary>
+            Easily read and write configuration options to an INI file
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.ConfigHelper.#ctor">
+            <summary>
+            Create an instance of the ConfigurationHelper with default settings
+            </summary>
+            <remarks>
+            The default settings are to store the INI in the user's roaming application data folder, in the Application.CompanyName subdirectory, using the Application.ProductName as the filename.
+            </remarks>
+        </member>
+        <member name="M:RandM.RMLib.ConfigHelper.#ctor(RandM.RMLib.ConfigSaveLocation)">
+            <summary>
+            Create an instance of the ConfigurationHelper with a specific location for the INI to be saved
+            </summary>
+            <remarks>
+            The INI will be stored in the requested location with the Application.ProductName as the file name.  If the Global or User Application Data folder is selected, the INI will be created in the Application.CompanyName subdirectory.
+            </remarks>
+        </member>
+        <member name="M:RandM.RMLib.ConfigHelper.#ctor(System.String)">
+            <summary>
+            Create an instance of the ConfigurationHelper with a specific filename for the INI
+            </summary>
+            <remarks>
+            The INI will be stored in the user's roaming application data folder with the given name.  If the Global or User Application Data folder is selected, the INI will be created in the Application.CompanyName subdirectory.
+            </remarks>
+        </member>
+        <member name="M:RandM.RMLib.ConfigHelper.#ctor(RandM.RMLib.ConfigSaveLocation,System.String)">
+            <summary>
+            Create an instance of the ConfigurationHelper with a specific location and filename for the INI
+            </summary>
+            <remarks>
+            The INI will be stored in the given location with the given name.  If the Global or User Application Data folder is selected, the INI will be created in the Application.CompanyName subdirectory.
+            </remarks>
+        </member>
+        <member name="M:RandM.RMLib.ConfigHelper.Load">
+            <summary>
+            Basic load method that reads from the currently stored section name
+            </summary>
+            <remarks>
+            If no section name has previously been stored, the default "CONFIGURATION" section will be read
+            </remarks>
+            <returns>true if the INI section existed; false otherwise</returns>
+        </member>
+        <member name="M:RandM.RMLib.ConfigHelper.Load(System.String)">
+            <summary>
+            Advanced load method that allows you to specify the section to read from
+            </summary>
+            <param name="sectionName">The section to read within the INI</param>
+            <returns>true if the INI section existed; false otherwise</returns>
+        </member>
+        <member name="M:RandM.RMLib.ConfigHelper.Save">
+            <summary>
+            Basic save method that saves to the currently stored section name
+            </summary>
+            <remarks>
+            If no section name has previously been stored, the default "CONFIGURATION" section will be saved
+            </remarks>
+        </member>
+        <member name="M:RandM.RMLib.ConfigHelper.Save(System.String)">
+            <summary>
+            Advanced save method that allows you to specify the section to save to
+            </summary>
+            <param name="sectionName">The section to save within the INI</param>
+        </member>
+        <member name="P:RandM.RMLib.ConfigHelper.SectionName">
+            <summary>
+            The section to read from / write to when using the parameterless Load and Save methods
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.ConfigHelper.FileName">
+            <summary>
+            The name of the INI file to be read from / saved to
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.ConfigHelper.IniPassword">
+            <summary>
+            The password to encrypt the INI file with (using AES)
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.ConfigHelper.Loaded">
+            <summary>
+            Indicates whether the previous call to Load() succeeded or not
+            </summary>
+        </member>
+        <member name="P:RandM.RMLib.ConfigHelper.RMSecureStringPassword">
+            <summary>
+            The password to use when storing an RMSecureString in the INI file
+            </summary>
+            <remarks>
+            If a password is supplied, any RMSecureString will be stored in an encrypted fashion (AES), while if the password is left blank, any RMSecureString will be stored in a protected fashion (DPAPI)
+            </remarks>
+        </member>
+        <member name="T:RandM.RMLib.ConfigSaveLocation">
+            <summary>
+            The known locations that ConfigurationHelper can save the INI file to
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.ConfigSaveLocation.Absolute">
+            <summary>
+            The filename parameter in the constructor is an absolute path indicating where to save the INI
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.ConfigSaveLocation.GlobalApplicationData">
+            <summary>
+            The filename parameter in the constructor is relative to the global roaming application data folder (any user can access this location)
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.ConfigSaveLocation.Relative">
+            <summary>
+            The filename parameter in the constructor is relative to the application's exe
+            </summary>
+            <remarks>
+            This location is not recommended, as a program installed to Program Files may not have write access to its own folder
+            </remarks>
+        </member>
+        <member name="F:RandM.RMLib.ConfigSaveLocation.UserApplicationData">
+            <summary>
+            The filename parameter in the constructor is relative to the user's roaming application data folder (only the current user can access this location)
+            </summary>
+        </member>
+        <member name="M:RandM.RMLib.StringUtils.CRLFtoBR(System.String)">
+            <summary>
+            Changes the CRLF's in a given string to be <br />
+            </summary>
+            <param name="text">The text to perform the conversion on</param>
+            <returns>The text with CRLF's replaced with <br /></returns>
+        </member>
+        <member name="M:RandM.RMLib.StringUtils.LFtoCRLF(System.String)">
+            <summary>
+            Changes the LF's in a given string to be CR+LF (useful for unix to windows conversions)
+            </summary>
+            <param name="text">The text to perform the conversion on</param>
+            <returns>The text with LF's replaced with CR+LF</returns>
+        </member>
+        <member name="T:RandM.RMLib.TelnetCommand">
+            <summary>
+            Commands the telnet negotiator will handle
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.EndSubnegotiation">
+            <summary>
+            SE: End of subnegotiation parameters.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.NoOperation">
+            <summary>
+            NOP: No operation.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.DataMark">
+            <summary>
+            Data Mark: The data stream portion of a Synch. This should always be accompanied by a TCP Urgent notification.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.Break">
+            <summary>
+            Break: NVT character BRK.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.InterruptProcess">
+            <summary>
+            Interrupt Process: The function IP.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.AbortOutput">
+            <summary>
+            Abort output: The function AO.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.AreYouThere">
+            <summary>
+            Are You There: The function AYT.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.EraseCharacter">
+            <summary>
+            Erase character: The function EC.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.EraseLine">
+            <summary>
+            Erase Line: The function EL.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.GoAhead">
+            <summary>
+            Go ahead: The GA signal
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.Subnegotiation">
+            <summary>
+            SB: Indicates that what follows is subnegotiation of the indicated option.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.Will">
+            <summary>
+            WILL: Indicates the desire to begin performing, or confirmation that you are now performing, the indicated option.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.Wont">
+            <summary>
+            WON'T: Indicates the refusal to perform, or continue performing, the indicated option.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.Do">
+            <summary>
+            DO: Indicates the request that the other party perform, or confirmation that you are expecting the other party to perform, the indicated option.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.Dont">
+            <summary>
+            DON'T: Indicates the demand that the other party stop performing, or confirmation that you are no longer expecting the other party to perform, the indicated option.
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetCommand.IAC">
+            <summary>
+            IAC: Data Byte 255
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.TelnetNegotiationState">
+            <summary>
+            The possible states the telnet negotiator may find itself in
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetNegotiationState.Data">
+            <summary>
+            The default data state
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetNegotiationState.IAC">
+            <summary>
+            The last received character was an IAC
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetNegotiationState.Do">
+            <summary>
+            The last received character was a DO command
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetNegotiationState.Dont">
+            <summary>
+            The last received character was a DONT command
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetNegotiationState.Will">
+            <summary>
+            The last received character was a WILL command
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetNegotiationState.Wont">
+            <summary>
+            The last received character was a WONT command
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetNegotiationState.Subnegotiation">
+            <summary>
+            The last received character was a SUBNEGOTIATION command
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetNegotiationState.SubnegotiationData">
+            <summary>
+            The last received character was the option to be negotiated
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetNegotiationState.SubnegotiationIAC">
+            <summary>
+            The last received character was an IAC
+            </summary>
+        </member>
+        <member name="T:RandM.RMLib.TelnetOption">
+            <summary>
+            Options that can be enabled/disabled in a telnet connection
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetOption.None">
+            <summary>
+            Null option
+            </summary>
+        </member>
+        <member name="F:RandM.RMLib.TelnetOption.TransmitBinary">
+            <summary>
+            When enabled, data is transmitted as 8-bit binary data.
+            </summary>
+            <remarks>
+            Defined in RFC 856
+            
+            Default is to not transmit in binary.
+            </remarks>
+        </member>
+        <member name="F:RandM.RMLib.TelnetOption.Echo">
+            <summary>
+            When enabled, the side performing the echoing transmits (echos) data characters it receives back to the sender of the data characters.
+            </summary>
+            <remarks>
+            Defined in RFC 857
+            
+            Default is to not echo over the telnet connection.
+            </remarks>
+        </member>
+        <member name="F:RandM.RMLib.TelnetOption.SuppressGoAhead">
+            <summary>
+            When enabled, the sender need not transmit GAs.
+            </summary>
+            <remarks>
+            Defined in RFC 858
+            
+            Default is to not suppress go aheads.
+            </remarks>
+        </member>
+        <member name="F:RandM.RMLib.TelnetOption.WindowSize">
+            <summary>
+            Allows the NAWS (negotiate about window size) subnegotiation command to be used if both sides agree
+            </summary>
+            <remarks>
+            Defined in RFC 1073
+            
+            Default is to not allow the NAWS subnegotiation
+            </remarks>
+        </member>
+        <member name="F:RandM.RMLib.TelnetOption.LineMode">
+            <summary>
+            Linemode Telnet is a way of doing terminal character processing on the client side of a Telnet connection.
+            </summary>
+            <remarks>
+            Defined in RFC 1184
+            
+            Default is to not allow the LINEMODE subnegotiation
+            </remarks>
+        </member>
+    </members>
+</doc>

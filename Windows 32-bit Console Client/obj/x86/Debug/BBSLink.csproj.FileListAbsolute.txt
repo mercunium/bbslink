@@ -1,0 +1,9 @@
+C:\Users\wsmith\Documents\Visual Studio 2012\Projects\BBSLink\bin\Debug\BBSLink.exe
+C:\Users\wsmith\Documents\Visual Studio 2012\Projects\BBSLink\bin\Debug\BBSLink.pdb
+C:\Users\wsmith\Documents\Visual Studio 2012\Projects\BBSLink\obj\x86\Debug\BBSLink.csprojResolveAssemblyReference.cache
+C:\Users\wsmith\Documents\Visual Studio 2012\Projects\BBSLink\obj\x86\Debug\BBSLink.exe
+C:\Users\wsmith\Documents\Visual Studio 2012\Projects\BBSLink\obj\x86\Debug\BBSLink.pdb
+C:\Users\wsmith\Documents\Visual Studio 2012\Projects\BBSLink\bin\Debug\RMLib.dll
+C:\Users\wsmith\Documents\Visual Studio 2012\Projects\BBSLink\bin\Debug\System.Data.SQLite.dll
+C:\Users\wsmith\Documents\Visual Studio 2012\Projects\BBSLink\bin\Debug\RMLib.pdb
+C:\Users\wsmith\Documents\Visual Studio 2012\Projects\BBSLink\bin\Debug\RMLib.xml
