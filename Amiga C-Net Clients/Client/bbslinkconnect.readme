@@ -1,0 +1,60 @@
+                  CNet BBSLink Connect  Version 1.2                    
+    Written by Link of CheckSum Acknowledged BBS on 3 Feb 2018         
+    Used to seamlessly connect a CNet Amiga BBS to the BBSLink.Net     
+    door game server.
+	This is public domain software.
+    Use at your own risk.                                              
+    Thanks to Mark Mearns and Dan Fitzgerald for their help. 
+
+    Version 1.2 Updated by Hauns Froehlingsdorf to use http_get instead
+    of httpj.
+	
+New Installation Instructions:
+
+1.  Create a directory called 'BBSLink' in your PFiles: directory.   
+    Copy the bbslinkconnect file there.
+2.  Download the 'http_get.lha' archive from aminet.net.  You will 
+    find it in the comm/tcp section.
+3.  Extract the file named 'http_get' from that archive and copy it 
+    to System:
+4.  Modify the access level and add the following command to section 
+    2 of your BBSMenu file:
+
+DOORLINK `0-31 | #2 cnet:doors/internet_support/ctelnet games.bbslink.net}
+		 ^^^^^
+		    \
+			  Access Level
+			  
+	Make sure the above path to the ctelnet program is correct for 
+	your system.  Then reload text/menus.
+5.  Register on bbslink.net as a sysop.  You will receive an email 
+    from them with the following info.  Put your information from that
+    email into these fields:   
+
+SystemCode='yoursyscode'
+AuthorizationCode='yourauthcode'
+SchemeCode='yourschemecode'
+
+
+6.  For every different Door you want to run, add an Arexx Door PFile 
+    entry for this script. You will find a list of Doors at   
+	www.bbslink.net/sysop. Each door has a code associated. That door 
+	code will be the argument portion of the PFile entry.  For example, 
+	you would use the argument 'lord' for Legend of the Red Dragon.  
+	Be sure to set the access level for the door before you save the 
+	settings.  See example image in this archive.
+7.  That's it!  Enjoy the best the PC world has to offer in BBS Doors.
+	
+Upgrade Instructions:
+
+    If you are upgrading from version 1.0, all you need to do is copy the 
+    version 1.1 file 'bbslinkconnect' to 'pfiles:bbslink/bbslinkconnect',
+    overwriting version 1.0. No other modifications to your CNet BBS 
+    configuration are required.
+
+Changes:
+
+  Version 1.1 - Script modified to address changes at bbslink.net.  
+  
+**************************************************************************
+****************** CheckSum Acknowledged BBS telnet://24.225.22.26:2600 **  
